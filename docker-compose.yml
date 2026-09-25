@@ -1,0 +1,41 @@
+name: ecommerce-pipeline
+
+services:
+  mongo:
+    image: mongo:7.0
+    restart: unless-stopped
+    ports:
+      # Published on loopback only: this dev instance has no authentication.
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+
+  app:
+    build:
+      context: .
+      args:
+        INSTALL_PLAYWRIGHT: ${INSTALL_PLAYWRIGHT:-false}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DATABASE: ${MONGO_DATABASE:-ecommerce}
+      MONGO_BATCH_SIZE: ${MONGO_BATCH_SIZE:-500}
+      MONGO_FLUSH_INTERVAL: ${MONGO_FLUSH_INTERVAL:-5}
+      ENABLE_PLAYWRIGHT: ${ENABLE_PLAYWRIGHT:-0}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      # Figures and the JSON summary land on the host.
+      - ./reports:/app/reports
+    # Runs the demo (indexes -> 50k seed -> EDA) once, then exits.
+    restart: "no"
+
+volumes:
+  mongo_data:

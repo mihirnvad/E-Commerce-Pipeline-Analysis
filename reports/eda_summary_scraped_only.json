@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-09-25T02:15:42+00:00",
+  "database": "ecommerce",
+  "listings": 1175,
+  "synthetic_listings": 0,
+  "platforms": {
+    "books_toscrape": 1000,
+    "webscraper_io": 147,
+    "web_scraping_dev": 28
+  },
+  "excluded_non_usd_listings": 1000,
+  "pricing_by_category": [
+    {
+      "category": "Electronics",
+      "listings": 147,
+      "mean": 781.48,
+      "median": 739.99,
+      "q1": 406.6,
+      "q3": 1183.44,
+      "p95": 1358.34,
+      "share_discounted_pct": 0.0,
+      "median_discount_pct": 0.0,
+      "iqr": 776.84
+    },
+    {
+      "category": "Apparel",
+      "listings": 12,
+      "mean": 54.16,
+      "median": 54.99,
+      "q1": 29.99,
+      "q3": 79.99,
+      "p95": 89.99,
+      "share_discounted_pct": 100.0,
+      "median_discount_pct": 15.48,
+      "iqr": 50.0
+    },
+    {
+      "category": "Grocery",
+      "listings": 16,
+      "mean": 5.93,
+      "median": 4.99,
+      "q1": 4.99,
+      "q3": 4.99,
+      "p95": 9.99,
+      "share_discounted_pct": 18.75,
+      "median_discount_pct": 23.09,
+      "iqr": 0.0
+    }
+  ],
+  "discounts": {
+    "share_discounted_pct": 8.6,
+    "median_depth_pct": 16.7,
+    "mean_depth_pct": 17.1,
+    "p90_depth_pct": 24.2,
+    "share_round_number_promos_pct": 26.7
+  },
+  "popularity": {
+    "total_reviews": 1247,
+    "median_reviews_per_listing": 0.0,
+    "top_1pct_share_of_reviews_pct": 12.3,
+    "top_10pct_share_of_reviews_pct": 89.1,
+    "listings_without_reviews_pct": 85.8,
+    "rating_vs_log_reviews_spearman": 0.058,
+    "top_subcategories": [
+      {
+        "category": "Electronics",
+        "subcategory": "Laptops",
+        "reviews": 807
+      },
+      {
+        "category": "Electronics",
+        "subcategory": "Tablets",
+        "reviews": 170
+      },
+      {
+        "category": "Apparel",
+        "subcategory": "Unspecified",
+        "reviews": 128
+      },
+      {
+        "category": "Grocery",
+        "subcategory": "Consumables",
+        "reviews": 86
+      },
+      {
+        "category": "Electronics",
+        "subcategory": "Touch",
+        "reviews": 56
+      }
+    ]
+  },
+  "sentiment": {
+    "reviews": 56,
+    "pearson_r": 0.619,
+    "spearman_rho": 0.527,
+    "mean_sentiment_by_star": {
+      "3": 0.288,
+      "4": 0.669,
+      "5": 0.815
+    },
+    "star_distribution_pct": {
+      "3": 8.9,
+      "4": 33.9,
+      "5": 57.1
+    },
+    "low_star_but_positive_text_pct": null,
+    "high_star_but_negative_text_pct": 0.0
+  },
+  "price_trend": {}
+}

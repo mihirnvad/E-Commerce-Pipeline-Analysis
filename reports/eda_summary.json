@@ -1,0 +1,142 @@
+{
+  "generated_at": "2026-09-25T02:14:22+00:00",
+  "database": "ecommerce",
+  "listings": 51175,
+  "synthetic_listings": 50000,
+  "platforms": {
+    "demo_marketplace": 22454,
+    "demo_megastore": 17661,
+    "demo_outlet": 9885,
+    "books_toscrape": 1000,
+    "webscraper_io": 147,
+    "web_scraping_dev": 28
+  },
+  "excluded_non_usd_listings": 1000,
+  "pricing_by_category": [
+    {
+      "category": "Electronics",
+      "listings": 20187,
+      "mean": 462.19,
+      "median": 339.99,
+      "q1": 170.99,
+      "q3": 639.99,
+      "p95": 1249.99,
+      "share_discounted_pct": 29.89,
+      "median_discount_pct": 20.0,
+      "iqr": 469.0
+    },
+    {
+      "category": "Home Goods",
+      "listings": 12659,
+      "mean": 113.84,
+      "median": 54.74,
+      "q1": 30.99,
+      "q3": 106.36,
+      "p95": 441.99,
+      "share_discounted_pct": 34.67,
+      "median_discount_pct": 20.0,
+      "iqr": 75.38
+    },
+    {
+      "category": "Apparel",
+      "listings": 17313,
+      "mean": 68.15,
+      "median": 52.99,
+      "q1": 30.99,
+      "q3": 87.99,
+      "p95": 172.87,
+      "share_discounted_pct": 45.03,
+      "median_discount_pct": 20.01,
+      "iqr": 57.0
+    },
+    {
+      "category": "Grocery",
+      "listings": 16,
+      "mean": 5.93,
+      "median": 4.99,
+      "q1": 4.99,
+      "q3": 4.99,
+      "p95": 9.99,
+      "share_discounted_pct": 18.75,
+      "median_discount_pct": 23.09,
+      "iqr": 0.0
+    }
+  ],
+  "discounts": {
+    "share_discounted_pct": 36.3,
+    "median_depth_pct": 20.0,
+    "mean_depth_pct": 22.8,
+    "p90_depth_pct": 40.0,
+    "share_round_number_promos_pct": 57.6
+  },
+  "popularity": {
+    "total_reviews": 1785860,
+    "median_reviews_per_listing": 3.0,
+    "top_1pct_share_of_reviews_pct": 58.5,
+    "top_10pct_share_of_reviews_pct": 84.6,
+    "listings_without_reviews_pct": 32.0,
+    "rating_vs_log_reviews_spearman": 0.008,
+    "top_subcategories": [
+      {
+        "category": "Electronics",
+        "subcategory": "Smartphones",
+        "reviews": 254944
+      },
+      {
+        "category": "Apparel",
+        "subcategory": "T-Shirts",
+        "reviews": 230063
+      },
+      {
+        "category": "Electronics",
+        "subcategory": "Headphones",
+        "reviews": 209357
+      },
+      {
+        "category": "Apparel",
+        "subcategory": "Sneakers",
+        "reviews": 179540
+      },
+      {
+        "category": "Electronics",
+        "subcategory": "Smartwatches",
+        "reviews": 111510
+      }
+    ]
+  },
+  "sentiment": {
+    "reviews": 111272,
+    "pearson_r": 0.517,
+    "spearman_rho": 0.442,
+    "mean_sentiment_by_star": {
+      "1": -0.167,
+      "2": -0.044,
+      "3": 0.215,
+      "4": 0.613,
+      "5": 0.671
+    },
+    "star_distribution_pct": {
+      "1": 7.3,
+      "2": 2.6,
+      "3": 13.6,
+      "4": 30.8,
+      "5": 45.6
+    },
+    "low_star_but_positive_text_pct": 26.8,
+    "high_star_but_negative_text_pct": 9.5
+  },
+  "price_trend": {
+    "Apparel": {
+      "weeks": 12,
+      "change_pct": -2.0
+    },
+    "Electronics": {
+      "weeks": 12,
+      "change_pct": -4.1
+    },
+    "Home Goods": {
+      "weeks": 12,
+      "change_pct": 1.1
+    }
+  }
+}

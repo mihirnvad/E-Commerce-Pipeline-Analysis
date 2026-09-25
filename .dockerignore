@@ -1,0 +1,12 @@
+.git
+.github
+.venv
+venv
+.env
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.scrapy
+reports
+*.jsonl
+*.log

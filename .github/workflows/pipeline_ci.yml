@@ -1,0 +1,87 @@
+name: pipeline-ci
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    name: flake8 + pytest (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    services:
+      # Storage tests exercise real upsert / $slice / unique-index behaviour.
+      mongo:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand(\"ping\").ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 6
+    env:
+      MONGO_TEST_URI: mongodb://localhost:27017
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Lint
+        run: flake8 .
+      - name: Test
+        run: pytest -v
+
+  end-to-end:
+    name: seed -> index -> EDA against MongoDB 7
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    services:
+      mongo:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand(\"ping\").ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 6
+    env:
+      MONGO_URI: mongodb://localhost:27017
+      MONGO_DATABASE: ci_ecommerce
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Create indexes
+        run: python scripts/setup_mongo.py
+      - name: Seed 5k products (idempotency check runs it twice)
+        run: |
+          python scripts/seed_50k_mock.py --products 5000
+          python scripts/seed_50k_mock.py --products 5000
+          python - <<'EOF'
+          from pymongo import MongoClient
+          db = MongoClient("mongodb://localhost:27017").ci_ecommerce
+          n = db.products.count_documents({})
+          assert n == 5000, f"expected 5000 products after re-seed, found {n}"
+          print("products:", n, "reviews:", db.reviews.count_documents({}))
+          EOF
+      - name: Run EDA
+        run: python analysis/eda_analysis.py --out-dir ci-figures --summary ci-figures/eda_summary.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eda-figures
+          path: ci-figures/

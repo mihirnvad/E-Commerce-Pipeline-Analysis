@@ -1,0 +1,22 @@
+# --- Extraction -------------------------------------------------------------
+scrapy>=2.13,<3
+# Optional headless rendering (ENABLE_PLAYWRIGHT=1). Browsers are installed separately:
+#   python -m playwright install chromium
+scrapy-playwright>=0.0.43
+
+# --- Validation + storage ---------------------------------------------------
+pydantic>=2.7,<3
+pymongo>=4.8,<5
+python-dateutil>=2.9
+python-dotenv>=1.0
+
+# --- Analysis ---------------------------------------------------------------
+numpy>=1.26
+pandas>=2.2,<3
+matplotlib>=3.8
+seaborn>=0.13
+nltk>=3.9
+
+# --- Quality ----------------------------------------------------------------
+pytest>=8.0
+flake8>=7.0
